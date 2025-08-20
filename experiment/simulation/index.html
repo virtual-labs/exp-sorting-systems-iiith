@@ -1,13 +1,372 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<!-- Add CSS at the head of HTML file -->
-    <link rel="stylesheet" href="./css/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distributed Sort - MapReduce Simulation</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-		<!-- Your code goes here-->
+    <!-- Floating Instructions Button -->
+    <button id="floatingInstructionsBtn" class="floating-instructions" title="Show Instructions">
+        <span class="instruction-icon">📚</span>
+        Instructions
+    </button>
 
-	<!-- Add JS at the bottom of HTML file --> 
-        <script src="./js/main.js"></script>
+    <!-- Instructions Modal -->
+    <div id="instructionsModal" class="instructions-modal">
+        <div class="instructions-modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <div class="header-content">
+                    <div class="header-icon">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="header-text">
+                        <h2>Instructions</h2>
+                        <p>Learn how to use the MapReduce Distributed Sort Simulator</p>
+                    </div>
+                </div>
+                <button class="modal-close" id="closeInstructionsModal">
+                    <svg class="w-7 h-7" fill="currentColor" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <div class="instructions-grid">
+                    <!-- Interactive Controls Card -->
+                    <div class="instruction-card">
+                        <div class="instruction-icon blue">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="instruction-title">Interactive Controls</h3>
+                        <ul class="instruction-list">
+                            <li><strong>Configure Parameters:</strong> Set number of mappers (2-6), reducers (2-6), and partition strategy.</li>
+                            <li><strong>Load Data:</strong> Initialize simulation with your input data (comma-separated numbers).</li>
+                            <li><strong>Step Through:</strong> Use "Next Step" to progress through each MapReduce phase individually.</li>
+                            <li><strong>Auto Run:</strong> Automatic progression through all phases with visual feedback.</li>
+                            <li><strong>Pause/Reset:</strong> Control simulation flow and restart with different parameters.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Simulation Metrics Card -->
+                    <div class="instruction-card">
+                        <div class="instruction-icon green">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="instruction-title">Simulation Metrics</h3>
+                        <ul class="instruction-list">
+                            <li><strong>Data Distribution:</strong> Visual representation of how data is distributed across mappers.</li>
+                            <li><strong>Processing Progress:</strong> Real-time tracking of sort operations and data movement.</li>
+                            <li><strong>Performance Statistics:</strong> Monitor successful sorts, elements processed, and communication rounds.</li>
+                        </ul>
+                    </div>
+
+                    <!-- MapReduce Process Card -->
+                    <div class="instruction-card">
+                        <div class="instruction-icon blue">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="instruction-title">MapReduce Phases</h3>
+                        <ul class="instruction-list">
+                            <li><strong>Map Phase:</strong> Input data distributed across mapper nodes for parallel processing.</li>
+                            <li><strong>Shuffle Phase:</strong> Data reorganized and grouped by partition keys (Hash/Range).</li>
+                            <li><strong>Reduce Phase:</strong> Each reducer independently sorts its assigned data partition.</li>
+                            <li><strong>Final Merge:</strong> Sorted partitions combined into final sorted output.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Learning Objectives Card -->
+                    <div class="instruction-card">
+                        <div class="instruction-icon orange">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="instruction-title">Learning Objectives</h3>
+                        <ul class="instruction-list">
+                            <li>Understand distributed sorting principles and MapReduce framework benefits.</li>
+                            <li>Compare Hash vs Range partitioning strategies for data distribution.</li>
+                            <li>Observe parallel processing impact on sorting large datasets efficiently.</li>
+                            <li>Analyze the relationship between mappers, reducers, and overall performance.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Main Grid Layout -->
+        <div class="grid-container">
+            <!-- Controls Panel -->
+            <div class="panel">
+                <h2 class="panel-title">Configuration & Controls</h2>
+                
+                <div class="step-counter" id="stepCounter">Step: 0</div>
+                
+                <!-- Configuration Section -->
+                <div class="form-group">
+                    <label for="mapperCount">Number of Mappers:</label>
+                    <div class="number-input-container">
+                        <button type="button" class="number-btn minus-btn" onclick="decrementMapper()">−</button>
+                        <input type="number" id="mapperCount" class="form-control number-input" min="2" max="6" value="3" step="1" readonly>
+                        <button type="button" class="number-btn plus-btn" onclick="incrementMapper()">+</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reducerCount">Number of Reducers:</label>
+                    <div class="number-input-container">
+                        <button type="button" class="number-btn minus-btn" onclick="decrementReducer()">−</button>
+                        <input type="number" id="reducerCount" class="form-control number-input" min="2" max="6" value="2" step="1" readonly>
+                        <button type="button" class="number-btn plus-btn" onclick="incrementReducer()">+</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="partitionStrategy">Partition Strategy:</label>
+                    <select id="partitionStrategy" class="form-control">
+                        <option value="hash">Hash Partitioning</option>
+                        <option value="range" selected>Range Partitioning</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputData">Input Data (comma-separated):</label>
+                    <textarea id="inputData" placeholder="Enter numbers separated by commas..." class="form-control">45, 23, 67, 12, 89, 34, 56, 78, 90, 11, 33, 55, 77, 99, 22</textarea>
+                </div>
+
+                <!-- Control Buttons -->
+                <button id="loadDataBtn" class="btn">Load Data</button>
+                <button id="stepBtn" class="btn">Next Step</button>
+                <button id="autoRunBtn" class="btn">Auto Run</button>
+                <button id="pauseBtn" class="btn btn-secondary">Pause</button>
+                <button id="resetBtn" class="btn btn-danger">Reset</button>
+                
+                <!-- Progress Bar -->
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+                </div>
+
+                <!-- Instructions Button -->
+                <!-- <button id="instructionsBtn" class="btn btn-secondary">Show Instructions</button> -->
+            </div>
+
+            <!-- Experiment Area -->
+            <div class="panel">
+                <h2 class="panel-title">MapReduce Visualization</h2>
+                <div class="experiment-area">
+                    
+                    <!-- Input Data Section -->
+                    <div class="data-section">
+                        <h3>Input Data</h3>
+                        <div id="inputDataViz" class="data-container">
+                            <!-- Data items will be populated here -->
+                        </div>
+                    </div>
+
+                    <!-- Map Phase -->
+                    <div class="data-section">
+                        <h3>Map Phase - Data Distribution</h3>
+                        <div id="mappersViz" class="mappers-container">
+                            <!-- Mapper containers will be generated here -->
+                        </div>
+                    </div>
+
+                    <!-- Shuffle Phase -->
+                    <div class="data-section">
+                        <h3>Shuffle & Sort Phase</h3>
+                        <div id="shuffleViz" class="shuffle-container">
+                            <span class="status-indicator status-waiting" id="shuffleStatus"></span>
+                            Shuffle and sort in progress...
+                        </div>
+                    </div>
+
+                    <!-- Reduce Phase -->
+                    <div class="data-section">
+                        <h3>Reduce Phase - Final Sorting</h3>
+                        <div id="reducersViz" class="reducers-container">
+                            <!-- Reducer containers will be generated here -->
+                        </div>
+                    </div>
+
+                    <!-- Final Output -->
+                    <div class="data-section">
+                        <h3>Final Sorted Output</h3>
+                        <div id="outputDataViz" class="data-container">
+                            <!-- Final sorted data will appear here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity Log Panel -->
+            <div class="panel">
+                <h2 class="panel-title">Logs and Statistics</h2>
+                
+                <div class="status-section">
+                    <h4>Logs</h4>
+                    <div class="logs" id="logContainer">
+                        <div class="log-entry info">[System] Distributed Sort MapReduce initialized</div>
+                        <div class="log-entry info">[Info] Configure parameters and click 'Load Data' to begin</div>
+                    </div>
+                </div>
+
+                <div class="status-section">
+                    <h4>Experiment Statistics</h4>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalSortsCount">0</div>
+                            <div class="stat-label">Successful Sorts</div>
+                            <div class="stat-description">Completed experiments</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalElementsProcessed">0</div>
+                            <div class="stat-label">Elements Processed</div>
+                            <div class="stat-description">Total data items sorted</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="avgCommunicationRounds">0</div>
+                            <div class="stat-label">Avg Comm. Rounds</div>
+                            <div class="stat-description">Average per experiment</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalExperiments">0</div>
+                            <div class="stat-label">Total Experiments</div>
+                            <div class="stat-description">All runs completed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions Modal -->
+        <div id="instructionsModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="modal-close" id="closeModal">&times;</span>
+                <h2>Distributed Sort Instructions</h2>
+                <div class="instructions">
+                    <h3>Overview</h3>
+                    <p>This simulation demonstrates how MapReduce framework performs distributed sorting of large datasets across multiple machines.</p>
+
+                    <h3>How to Use</h3>
+                    <ol>
+                        <li><strong>Configure Parameters:</strong> Set the number of mappers, reducers, and partition strategy</li>
+                        <li><strong>Input Data:</strong> Enter comma-separated numbers or use the default dataset</li>
+                        <li><strong>Load Data:</strong> Click "Load Data" to initialize the simulation</li>
+                        <li><strong>Step Through:</strong> Use "Next Step" to see each phase individually</li>
+                        <li><strong>Auto Run:</strong> Click "Auto Run" for automatic progression through all phases</li>
+                        <li><strong>Reset:</strong> Clear the simulation and start over with new parameters</li>
+                    </ol>
+
+                    <h3>MapReduce Phases</h3>
+                    <ul>
+                        <li><strong>Map Phase:</strong> Input data is distributed across mapper nodes</li>
+                        <li><strong>Shuffle Phase:</strong> Data is reorganized and grouped by partition keys</li>
+                        <li><strong>Reduce Phase:</strong> Each reducer sorts its assigned data partition</li>
+                        <li><strong>Merge Phase:</strong> Sorted partitions are merged into final sorted output</li>
+                    </ul>
+
+                    <h3>Partition Strategies</h3>
+                    <ul>
+                        <li><strong>Hash Partitioning:</strong> Uses hash function for even data distribution</li>
+                        <li><strong>Range Partitioning:</strong> Divides data into sorted ranges</li>
+                    </ul>
+
+                    <h3>Key Benefits</h3>
+                    <ul>
+                        <li>Parallel processing reduces overall sorting time</li>
+                        <li>Scalable to handle very large datasets</li>
+                        <li>Fault-tolerant with automatic recovery</li>
+                        <li>Efficient network utilization during shuffle phase</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script>
+        // Number input increment/decrement functions
+        function incrementMapper() {
+            const input = document.getElementById('mapperCount');
+            const currentValue = parseInt(input.value);
+            const maxValue = parseInt(input.max);
+            if (currentValue < maxValue) {
+                input.value = currentValue + 1;
+                // Trigger change event to update the experiment
+                input.dispatchEvent(new Event('change'));
+            }
+        }
+
+        function decrementMapper() {
+            const input = document.getElementById('mapperCount');
+            const currentValue = parseInt(input.value);
+            const minValue = parseInt(input.min);
+            if (currentValue > minValue) {
+                input.value = currentValue - 1;
+                // Trigger change event to update the experiment
+                input.dispatchEvent(new Event('change'));
+            }
+        }
+
+        function incrementReducer() {
+            const input = document.getElementById('reducerCount');
+            const currentValue = parseInt(input.value);
+            const maxValue = parseInt(input.max);
+            if (currentValue < maxValue) {
+                input.value = currentValue + 1;
+                // Trigger change event to update the experiment
+                input.dispatchEvent(new Event('change'));
+            }
+        }
+
+        function decrementReducer() {
+            const input = document.getElementById('reducerCount');
+            const currentValue = parseInt(input.value);
+            const minValue = parseInt(input.min);
+            if (currentValue > minValue) {
+                input.value = currentValue - 1;
+                // Trigger change event to update the experiment
+                input.dispatchEvent(new Event('change'));
+            }
+        }
+
+        // Floating Instructions Modal Logic
+        const floatingInstructionsBtn = document.getElementById('floatingInstructionsBtn');
+        const instructionsModal = document.getElementById('instructionsModal');
+        const closeInstructionsModal = document.getElementById('closeInstructionsModal');
+
+        // Open instructions modal
+        floatingInstructionsBtn.addEventListener('click', function() {
+            instructionsModal.style.display = 'block';
+        });
+
+        // Close instructions modal
+        closeInstructionsModal.addEventListener('click', function() {
+            instructionsModal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === instructionsModal) {
+                instructionsModal.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
