@@ -2,154 +2,137 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "What is the main purpose of distributed sorting in large-scale systems?",
+      "question": "What is the primary strategy used in QuickSort algorithm?",
       "answers": {
-        "a": "To sort small amounts of data quickly",
-        "b": "To handle large datasets that cannot fit on a single machine",
-        "c": "To reduce memory usage",
-        "d": "To eliminate the need for comparison operations"
+        "a": "Divide and Conquer",
+        "b": "Dynamic Programming",
+        "c": "Greedy Approach",
+        "d": "Backtracking"
       },
       "explanations": {
-        "a": "Incorrect. Distributed sorting is designed for large-scale data, not small datasets.",
-        "b": "Correct. Distributed sorting enables processing of large datasets by distributing the work across multiple machines.",
-        "c": "Incorrect. While it may distribute memory usage, the main purpose is handling large datasets.",
-        "d": "Incorrect. Comparison operations are still needed in distributed sorting algorithms."
+        "a": "Correct! QuickSort uses divide and conquer by partitioning the array around a pivot and recursively sorting the partitions.",
+        "b": "Dynamic Programming is used for optimization problems with overlapping subproblems, not for QuickSort.",
+        "c": "Greedy approach makes local optimal choices, which is not how QuickSort works.",
+        "d": "Backtracking explores all possible solutions by undoing choices, which is not used in QuickSort."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "In QuickSort, what is the purpose of the pivot element?",
+      "answers": {
+        "a": "To find the minimum element",
+        "b": "To divide the array into two partitions",
+        "c": "To count the number of elements",
+        "d": "To find the maximum element"
+      },
+      "explanations": {
+        "a": "The pivot is not used to find the minimum element directly.",
+        "b": "Correct! The pivot divides the array such that elements smaller than pivot go to one side and larger elements go to the other side.",
+        "c": "The pivot is not used for counting elements.",
+        "d": "The pivot is not used to find the maximum element directly."
       },
       "correctAnswer": "b",
       "difficulty": "beginner"
     },
     {
-      "question": "In the MapReduce framework, what is the primary role of mappers?",
+      "question": "What is the best-case time complexity of QuickSort?",
       "answers": {
-        "a": "To combine and reduce data from multiple sources",
-        "b": "To store the final sorted output",
-        "c": "To process input data in parallel and produce key-value pairs",
-        "d": "To manage network communication between nodes"
+        "a": "O(n)",
+        "b": "O(n log n)",
+        "c": "O(n²)",
+        "d": "O(log n)"
       },
       "explanations": {
-        "a": "Incorrect. Combining and reducing data is the role of reducers.",
-        "b": "Incorrect. Mappers don't store final output; they process input data.",
-        "c": "Correct. Mappers process input data in parallel and emit intermediate key-value pairs.",
-        "d": "Incorrect. Network communication is managed by the MapReduce framework, not mappers specifically."
+        "a": "O(n) is too fast for a comparison-based sorting algorithm's best case.",
+        "b": "Correct! When the pivot divides the array into equal halves at each step, we get O(n log n) time complexity.",
+        "c": "O(n²) is the worst-case time complexity, not the best case.",
+        "d": "O(log n) is not achievable for sorting n elements."
       },
-      "correctAnswer": "c",
+      "correctAnswer": "b",
       "difficulty": "beginner"
     },
     {
-      "question": "What is a key advantage of using parallel processing in sorting algorithms?",
+      "question": "Which of the following pivot selection strategies can help avoid worst-case performance?",
       "answers": {
-        "a": "It eliminates the need for comparison operations",
-        "b": "It reduces the time complexity from O(n log n) to O(n)",
-        "c": "It enables faster processing by utilizing multiple processors simultaneously",
-        "d": "It guarantees perfect load balancing"
+        "a": "Always choose the first element",
+        "b": "Always choose the last element",
+        "c": "Random pivot selection",
+        "d": "Always choose the middle element"
       },
       "explanations": {
-        "a": "Incorrect. Parallel processing doesn't eliminate the need for comparisons.",
-        "b": "Incorrect. The fundamental time complexity of comparison-based sorting cannot be reduced below O(n log n).",
-        "c": "Correct. Parallel processing speeds up sorting by distributing work across multiple processors.",
-        "d": "Incorrect. Load balancing depends on data distribution and partitioning strategy."
-      },
-      "correctAnswer": "c",
-      "difficulty": "beginner"
-    },
-    {
-      "question": "What is the purpose of data partitioning in distributed sorting?",
-      "answers": {
-        "a": "To encrypt the data for security",
-        "b": "To compress the data to save space",
-        "c": "To divide data among multiple processing nodes for parallel processing",
-        "d": "To convert data into a different format"
-      },
-      "explanations": {
-        "a": "Incorrect. Partitioning is not related to encryption or security.",
-        "b": "Incorrect. Partitioning doesn't involve data compression.",
-        "c": "Correct. Data partitioning distributes the dataset among multiple nodes to enable parallel processing.",
-        "d": "Incorrect. Partitioning doesn't change the data format."
+        "a": "Choosing the first element can lead to worst-case O(n²) performance on sorted arrays.",
+        "b": "Choosing the last element can also lead to worst-case performance on certain inputs.",
+        "c": "Correct! Random pivot selection helps achieve expected O(n log n) performance by avoiding consistently bad pivot choices.",
+        "d": "Always choosing the middle element by position (not value) doesn't guarantee good performance."
       },
       "correctAnswer": "c",
       "difficulty": "intermediate"
     },
     {
-      "question": "In a two-phase distributed sort, what happens during the first phase?",
+      "question": "After one complete partitioning step in QuickSort, which statement is true about the pivot element?",
       "answers": {
-        "a": "Final sorting of all data",
-        "b": "Selection of pivots to determine data distribution",
-        "c": "Merging of sorted partitions",
-        "d": "Output generation"
+        "a": "It might need to be moved again",
+        "b": "It is in its final sorted position",
+        "c": "It is the smallest element in the array",
+        "d": "It is the largest element in the array"
       },
       "explanations": {
-        "a": "Incorrect. Final sorting happens in the second phase.",
-        "b": "Correct. The first phase involves selecting local and global pivots to determine how data should be partitioned.",
-        "c": "Incorrect. Merging happens after all partitions are sorted.",
-        "d": "Incorrect. Output generation is the final step."
+        "a": "Once partitioned correctly, the pivot doesn't need to be moved again.",
+        "b": "Correct! After partitioning, the pivot is in its final sorted position with smaller elements to its left and larger elements to its right.",
+        "c": "The pivot is not necessarily the smallest element, just in its correct sorted position.",
+        "d": "The pivot is not necessarily the largest element, just in its correct sorted position."
       },
       "correctAnswer": "b",
       "difficulty": "intermediate"
     },
     {
-      "question": "What is the main challenge that load balancing addresses in distributed sorting?",
+      "question": "What is the worst-case time complexity of QuickSort and when does it occur?",
       "answers": {
-        "a": "Network latency between nodes",
-        "b": "Uneven distribution of work among processing nodes",
-        "c": "Data corruption during transmission",
-        "d": "Memory limitations of individual nodes"
+        "a": "O(n log n) when array is randomly ordered",
+        "b": "O(n²) when pivot is always the median",
+        "c": "O(n²) when pivot is always the smallest or largest element",
+        "d": "O(n) when array is already sorted"
       },
       "explanations": {
-        "a": "Incorrect. While network latency is a concern, load balancing specifically addresses work distribution.",
-        "b": "Correct. Load balancing ensures that work is distributed evenly to prevent some nodes from being idle while others are overloaded.",
-        "c": "Incorrect. Data corruption is a separate issue from load balancing.",
-        "d": "Incorrect. Memory limitations are handled through data partitioning, not load balancing specifically."
+        "a": "O(n log n) is actually the average case for randomly ordered arrays.",
+        "b": "When pivot is the median, we get the best case O(n log n), not worst case.",
+        "c": "Correct! Worst case O(n²) occurs when the pivot is always the smallest or largest element, creating highly unbalanced partitions.",
+        "d": "O(n) is not achievable for comparison-based sorting of n elements."
       },
-      "correctAnswer": "b",
-      "difficulty": "intermediate"
-    },
-    {
-      "question": "How do global pivots improve load balancing compared to simple hash partitioning?",
-      "answers": {
-        "a": "They eliminate network communication entirely",
-        "b": "They adapt to actual data distribution rather than assuming uniform distribution",
-        "c": "They reduce memory usage on each node",
-        "d": "They guarantee O(1) sorting complexity"
-      },
-      "explanations": {
-        "a": "Incorrect. Global pivots don't eliminate network communication.",
-        "b": "Correct. Global pivots are chosen based on data samples, providing better load balancing for skewed data distributions.",
-        "c": "Incorrect. Global pivots don't directly affect memory usage per node.",
-        "d": "Incorrect. Global pivots don't change the fundamental sorting complexity."
-      },
-      "correctAnswer": "b",
+      "correctAnswer": "c",
       "difficulty": "advanced"
     },
     {
-      "question": "In the context of distributed sorting, what is the significance of communication rounds?",
+      "question": "In the context of QuickSort, what does 'reducing the problem' mean?",
       "answers": {
-        "a": "They measure the total memory usage of the algorithm",
-        "b": "They represent the number of data exchanges between nodes, affecting performance",
-        "c": "They count the number of comparison operations performed",
-        "d": "They indicate the number of sorting algorithms used"
+        "a": "Decreasing the number of comparisons",
+        "b": "Dividing the array into smaller subarrays to sort independently",
+        "c": "Removing duplicate elements",
+        "d": "Converting to a simpler sorting algorithm"
       },
       "explanations": {
-        "a": "Incorrect. Communication rounds don't measure memory usage.",
-        "b": "Correct. Communication rounds represent network overhead and are a key performance metric in distributed systems.",
-        "c": "Incorrect. Communication rounds don't count comparison operations.",
-        "d": "Incorrect. They don't indicate the number of sorting algorithms."
+        "a": "While comparisons may be optimized, 'reducing' specifically refers to problem size reduction.",
+        "b": "Correct! Reducing means breaking the original sorting problem into smaller independent sorting problems (partitions).",
+        "c": "QuickSort doesn't specifically remove duplicates, though it handles them.",
+        "d": "QuickSort doesn't convert to another algorithm; it reduces the problem size through partitioning."
       },
       "correctAnswer": "b",
-      "difficulty": "advanced"
+      "difficulty": "intermediate"
     },
     {
-      "question": "What is the key property that makes the final concatenation of sorted buckets produce the correct global sort?",
+      "question": "What is the space complexity of QuickSort in the average case?",
       "answers": {
-        "a": "All buckets have the same size",
-        "b": "Each bucket is sorted locally and buckets are partitioned by pivots ensuring order",
-        "c": "Buckets are processed in random order",
-        "d": "All elements in each bucket are identical"
+        "a": "O(1)",
+        "b": "O(log n)",
+        "c": "O(n)",
+        "d": "O(n log n)"
       },
       "explanations": {
-        "a": "Incorrect. Bucket sizes can vary; size equality is not required for correctness.",
-        "b": "Correct. Since buckets are partitioned by global pivots and each is sorted locally, concatenating them in order produces the correct global sort.",
-        "c": "Incorrect. Random order would not preserve the sorted property.",
-        "d": "Incorrect. Elements within buckets can be different; they just need to be in the correct range."
+        "a": "O(1) would mean constant space, but QuickSort needs space for recursion stack.",
+        "b": "Correct! The average case space complexity is O(log n) due to the recursion stack depth.",
+        "c": "O(n) space would be needed in the worst case when recursion depth is maximum.",
+        "d": "O(n log n) space is not required by QuickSort."
       },
       "correctAnswer": "b",
       "difficulty": "advanced"
