@@ -2,38 +2,157 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "In Phase 1 of distributed sort, what do mappers do with their local data?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Sort all data immediately",
+        "b": "Select random local pivots from their data",
+        "c": "Distribute data to reducers",
+        "d": "Merge with other mappers"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Incorrect. Complete sorting happens in Phase 2, not Phase 1.",
+        "b": "Correct. In Phase 1, each mapper selects a local pivot (sample) from its data chunk.",
+        "c": "Incorrect. Data distribution to reducers happens in Phase 2.",
+        "d": "Incorrect. Mappers don't merge with each other in Phase 1."
       },
-      "correctAnswer": "a",
+      "correctAnswer": "b",
       "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "What is the purpose of global pivots in distributed sort?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "To speed up local sorting",
+        "b": "To reduce network traffic",
+        "c": "To partition data into balanced buckets across all mappers",
+        "d": "To eliminate the need for reducers"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Incorrect. Global pivots don't directly affect local sorting speed.",
+        "b": "Incorrect. While they may help with efficiency, their primary purpose is partitioning.",
+        "c": "Correct. Global pivots are used to partition data into buckets that ensure balanced distribution across reducers.",
+        "d": "Incorrect. Reducers are still needed to sort their assigned buckets."
       },
       "correctAnswer": "c",
       "difficulty": "beginner"
+    },
+    {
+      "question": "How does the two-phase approach handle data distribution?",
+      "answers": {
+        "a": "Data is randomly distributed among all nodes",
+        "b": "Data is distributed based on hash values only",
+        "c": "Data is first sampled for pivots, then distributed based on pivot ranges",
+        "d": "All data is processed on a single master node"
+      },
+      "explanations": {
+        "a": "Incorrect. Random distribution doesn't ensure balanced workloads.",
+        "b": "Incorrect. Hash-based distribution is a different approach.",
+        "c": "Correct. The two-phase approach first samples data to select pivots, then uses these pivots to distribute data.",
+        "d": "Incorrect. This would not be a distributed approach."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "In Phase 2, how do mappers decide which bucket a data element belongs to?",
+      "answers": {
+        "a": "Using hash function like hash(value) % reducers",
+        "b": "Comparing the value against sorted global pivots",
+        "c": "Random assignment to any bucket",
+        "d": "Round-robin distribution"
+      },
+      "explanations": {
+        "a": "Incorrect. This is a different partitioning strategy, not used in pivot-based sorting.",
+        "b": "Correct. Mappers compare each data element against the sorted global pivots to determine which bucket it belongs to.",
+        "c": "Incorrect. Random assignment would not maintain sort order properties.",
+        "d": "Incorrect. Round-robin doesn't consider data values for proper partitioning."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "What advantage does this two-phase approach have over simple hash partitioning?",
+      "answers": {
+        "a": "Faster execution time",
+        "b": "Less memory usage",
+        "c": "Better load balancing with unknown data distributions",
+        "d": "Simpler implementation"
+      },
+      "explanations": {
+        "a": "Incorrect. Execution time depends on various factors, not necessarily faster.",
+        "b": "Incorrect. Memory usage is not the primary advantage.",
+        "c": "Correct. The two-phase pivot-based approach provides better load balancing because pivots are chosen based on actual data samples.",
+        "d": "Incorrect. The two-phase approach is more complex than simple hash partitioning."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "In the final output, how are the sorted buckets combined?",
+      "answers": {
+        "a": "They need to be merged and sorted again",
+        "b": "They are concatenated in reducer order (naturally sorted)",
+        "c": "They are randomly shuffled",
+        "d": "Only the largest bucket is used"
+      },
+      "explanations": {
+        "a": "Incorrect. No additional sorting is needed if buckets are properly partitioned.",
+        "b": "Correct. Since each reducer sorts its bucket locally and buckets are partitioned by global pivots, concatenating in order gives the final sorted output.",
+        "c": "Incorrect. Random shuffling would destroy the sort order.",
+        "d": "Incorrect. All buckets contribute to the final sorted output."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "What metric helps measure the efficiency of the distributed sort?",
+      "answers": {
+        "a": "Total memory usage",
+        "b": "Number of comparison operations",
+        "c": "Communication rounds between phases",
+        "d": "File I/O operations"
+      },
+      "explanations": {
+        "a": "Incorrect. While memory is important, communication overhead is more critical in distributed systems.",
+        "b": "Incorrect. Comparison operations are important for algorithmic analysis but not the main distributed efficiency metric.",
+        "c": "Correct. Communication rounds measure how much data needs to be transferred between mappers and reducers, which is a key efficiency metric.",
+        "d": "Incorrect. File I/O is less critical than network communication in distributed sorting."
+      },
+      "correctAnswer": "c",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "How does the selection of local pivots affect the overall performance of distributed sort?",
+      "answers": {
+        "a": "It has no effect on performance",
+        "b": "Better pivot selection leads to more balanced data distribution and reduced skew",
+        "c": "More pivots always result in better performance",
+        "d": "Pivot selection only affects memory usage"
+      },
+      "explanations": {
+        "a": "Incorrect. Pivot selection significantly affects performance through load balancing.",
+        "b": "Correct. Well-chosen pivots lead to balanced partitions, preventing some reducers from being overloaded while others are idle.",
+        "c": "Incorrect. The quality of pivots matters more than quantity; too many pivots can increase overhead.",
+        "d": "Incorrect. Pivot selection primarily affects load distribution, not just memory usage."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "What happens if the data distribution is highly skewed in a distributed sort system?",
+      "answers": {
+        "a": "The algorithm fails completely",
+        "b": "Some reducers may become bottlenecks while others remain underutilized",
+        "c": "Performance improves automatically",
+        "d": "Memory usage decreases significantly"
+      },
+      "explanations": {
+        "a": "Incorrect. The algorithm can still work but with reduced efficiency.",
+        "b": "Correct. Skewed data can cause load imbalance, where some reducers get much more data than others, creating bottlenecks.",
+        "c": "Incorrect. Skewed data typically degrades performance.",
+        "d": "Incorrect. Skewed data doesn't necessarily reduce memory usage and may actually increase it on some nodes."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
     }
   ]
 }

@@ -2,38 +2,157 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "What is the main purpose of distributed sorting in large-scale systems?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "To sort small amounts of data quickly",
+        "b": "To handle large datasets that cannot fit on a single machine",
+        "c": "To reduce memory usage",
+        "d": "To eliminate the need for comparison operations"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Incorrect. Distributed sorting is designed for large-scale data, not small datasets.",
+        "b": "Correct. Distributed sorting enables processing of large datasets by distributing the work across multiple machines.",
+        "c": "Incorrect. While it may distribute memory usage, the main purpose is handling large datasets.",
+        "d": "Incorrect. Comparison operations are still needed in distributed sorting algorithms."
       },
-      "correctAnswer": "a",
+      "correctAnswer": "b",
       "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "In the MapReduce framework, what is the primary role of mappers?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "To combine and reduce data from multiple sources",
+        "b": "To store the final sorted output",
+        "c": "To process input data in parallel and produce key-value pairs",
+        "d": "To manage network communication between nodes"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Incorrect. Combining and reducing data is the role of reducers.",
+        "b": "Incorrect. Mappers don't store final output; they process input data.",
+        "c": "Correct. Mappers process input data in parallel and emit intermediate key-value pairs.",
+        "d": "Incorrect. Network communication is managed by the MapReduce framework, not mappers specifically."
       },
       "correctAnswer": "c",
       "difficulty": "beginner"
+    },
+    {
+      "question": "What is a key advantage of using parallel processing in sorting algorithms?",
+      "answers": {
+        "a": "It eliminates the need for comparison operations",
+        "b": "It reduces the time complexity from O(n log n) to O(n)",
+        "c": "It enables faster processing by utilizing multiple processors simultaneously",
+        "d": "It guarantees perfect load balancing"
+      },
+      "explanations": {
+        "a": "Incorrect. Parallel processing doesn't eliminate the need for comparisons.",
+        "b": "Incorrect. The fundamental time complexity of comparison-based sorting cannot be reduced below O(n log n).",
+        "c": "Correct. Parallel processing speeds up sorting by distributing work across multiple processors.",
+        "d": "Incorrect. Load balancing depends on data distribution and partitioning strategy."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What is the purpose of data partitioning in distributed sorting?",
+      "answers": {
+        "a": "To encrypt the data for security",
+        "b": "To compress the data to save space",
+        "c": "To divide data among multiple processing nodes for parallel processing",
+        "d": "To convert data into a different format"
+      },
+      "explanations": {
+        "a": "Incorrect. Partitioning is not related to encryption or security.",
+        "b": "Incorrect. Partitioning doesn't involve data compression.",
+        "c": "Correct. Data partitioning distributes the dataset among multiple nodes to enable parallel processing.",
+        "d": "Incorrect. Partitioning doesn't change the data format."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "In a two-phase distributed sort, what happens during the first phase?",
+      "answers": {
+        "a": "Final sorting of all data",
+        "b": "Selection of pivots to determine data distribution",
+        "c": "Merging of sorted partitions",
+        "d": "Output generation"
+      },
+      "explanations": {
+        "a": "Incorrect. Final sorting happens in the second phase.",
+        "b": "Correct. The first phase involves selecting local and global pivots to determine how data should be partitioned.",
+        "c": "Incorrect. Merging happens after all partitions are sorted.",
+        "d": "Incorrect. Output generation is the final step."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "What is the main challenge that load balancing addresses in distributed sorting?",
+      "answers": {
+        "a": "Network latency between nodes",
+        "b": "Uneven distribution of work among processing nodes",
+        "c": "Data corruption during transmission",
+        "d": "Memory limitations of individual nodes"
+      },
+      "explanations": {
+        "a": "Incorrect. While network latency is a concern, load balancing specifically addresses work distribution.",
+        "b": "Correct. Load balancing ensures that work is distributed evenly to prevent some nodes from being idle while others are overloaded.",
+        "c": "Incorrect. Data corruption is a separate issue from load balancing.",
+        "d": "Incorrect. Memory limitations are handled through data partitioning, not load balancing specifically."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "How do global pivots improve load balancing compared to simple hash partitioning?",
+      "answers": {
+        "a": "They eliminate network communication entirely",
+        "b": "They adapt to actual data distribution rather than assuming uniform distribution",
+        "c": "They reduce memory usage on each node",
+        "d": "They guarantee O(1) sorting complexity"
+      },
+      "explanations": {
+        "a": "Incorrect. Global pivots don't eliminate network communication.",
+        "b": "Correct. Global pivots are chosen based on data samples, providing better load balancing for skewed data distributions.",
+        "c": "Incorrect. Global pivots don't directly affect memory usage per node.",
+        "d": "Incorrect. Global pivots don't change the fundamental sorting complexity."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "In the context of distributed sorting, what is the significance of communication rounds?",
+      "answers": {
+        "a": "They measure the total memory usage of the algorithm",
+        "b": "They represent the number of data exchanges between nodes, affecting performance",
+        "c": "They count the number of comparison operations performed",
+        "d": "They indicate the number of sorting algorithms used"
+      },
+      "explanations": {
+        "a": "Incorrect. Communication rounds don't measure memory usage.",
+        "b": "Correct. Communication rounds represent network overhead and are a key performance metric in distributed systems.",
+        "c": "Incorrect. Communication rounds don't count comparison operations.",
+        "d": "Incorrect. They don't indicate the number of sorting algorithms."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "What is the key property that makes the final concatenation of sorted buckets produce the correct global sort?",
+      "answers": {
+        "a": "All buckets have the same size",
+        "b": "Each bucket is sorted locally and buckets are partitioned by pivots ensuring order",
+        "c": "Buckets are processed in random order",
+        "d": "All elements in each bucket are identical"
+      },
+      "explanations": {
+        "a": "Incorrect. Bucket sizes can vary; size equality is not required for correctness.",
+        "b": "Correct. Since buckets are partitioned by global pivots and each is sorted locally, concatenating them in order produces the correct global sort.",
+        "c": "Incorrect. Random order would not preserve the sorted property.",
+        "d": "Incorrect. Elements within buckets can be different; they just need to be in the correct range."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
     }
   ]
 }

@@ -285,11 +285,11 @@ class DistributedSortExperiment {
     
     initializeEventListeners() {
         // Modal controls
-        document.getElementById('instructionsBtn').addEventListener('click', () => {
+        document.getElementById('floatingInstructionsBtn').addEventListener('click', () => {
             this.showModal();
         });
         
-        document.getElementById('closeModal').addEventListener('click', () => {
+        document.getElementById('closeInstructionsModal').addEventListener('click', () => {
             this.hideModal();
         });
         
