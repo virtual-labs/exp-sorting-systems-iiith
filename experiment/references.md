@@ -1,5 +1,3 @@
-### References
-
 #### Books and Educational Materials
 
 1. **Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C.** (2009). *Introduction to Algorithms* (3rd ed.). MIT Press.
