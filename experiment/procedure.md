@@ -1,4 +1,4 @@
-### Procedure
+
 
 Follow these step-by-step instructions to perform the sorting through reducing experiment:
 

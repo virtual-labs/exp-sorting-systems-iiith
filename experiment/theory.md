@@ -1,4 +1,3 @@
-### Theory: Sorting through Reducing
 
 #### Introduction
 
