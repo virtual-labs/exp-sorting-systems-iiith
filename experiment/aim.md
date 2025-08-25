@@ -1,5 +1,3 @@
-### Aim of the experiment
-
 The aim of this experiment is to understand and implement divide-and-conquer sorting algorithms that work by reducing the problem size through partitioning. Students will learn how algorithms like QuickSort and its variants use pivot elements to partition arrays into smaller subarrays, recursively sort these partitions, and combine them to achieve a fully sorted array.
 
 #### Learning Objectives:
