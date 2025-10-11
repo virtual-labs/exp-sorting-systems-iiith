@@ -48,7 +48,7 @@
                         </div>
                         <h3 class="instruction-title">Interactive Controls</h3>
                         <ul class="instruction-list">
-                            <li><strong>Configure Parameters:</strong> Set number of mappers (2-6), reducers (2-6), and partition strategy.</li>
+                            <li><strong>Configure Parameters:</strong> Set number of mappers (2-6), reducers (≤ mappers+1), and partition strategy.</li>
                             <li><strong>Load Data:</strong> Initialize simulation with your input data (comma-separated numbers).</li>
                             <li><strong>Step Through:</strong> Use "Next Step" to progress through each MapReduce phase individually.</li>
                             <li><strong>Auto Run:</strong> Automatic progression through all phases with visual feedback.</li>
@@ -134,6 +134,7 @@
                         <input type="number" id="reducerCount" class="form-control number-input" min="2" max="6" value="2" step="1" readonly>
                         <button type="button" class="number-btn plus-btn" onclick="incrementReducer()">+</button>
                     </div>
+                    <small class="form-text text-muted" id="reducerHelperText">Maximum: Mappers + 1 (currently 4)</small>
                 </div>
 
                 <div class="form-group">
@@ -155,6 +156,14 @@
                 <button id="autoRunBtn" class="btn">Auto Run</button>
                 <button id="pauseBtn" class="btn btn-secondary">Pause</button>
                 <button id="resetBtn" class="btn btn-danger">Reset</button>
+                
+                <!-- C++ Download Button -->
+                <button id="downloadCppBtn" class="btn btn-download" title="Download C++ Implementation">
+                    <svg class="download-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/>
+                    </svg>
+                    Download C++ Code
+                </button>
                 
                 <!-- Progress Bar -->
                 <div class="progress-bar">
@@ -264,7 +273,7 @@
 
                     <h3>How to Use</h3>
                     <ol>
-                        <li><strong>Configure Parameters:</strong> Set the number of mappers, reducers, and partition strategy</li>
+                        <li><strong>Configure Parameters:</strong> Set the number of mappers, reducers (≤ mappers+1), and partition strategy</li>
                         <li><strong>Input Data:</strong> Enter comma-separated numbers or use the default dataset</li>
                         <li><strong>Load Data:</strong> Click "Load Data" to initialize the simulation</li>
                         <li><strong>Step Through:</strong> Use "Next Step" to see each phase individually</li>
@@ -310,6 +319,8 @@
                 input.value = currentValue + 1;
                 // Trigger change event to update the experiment
                 input.dispatchEvent(new Event('change'));
+                // Adjust reducer count if it exceeds the new limit
+                adjustReducerLimit();
             }
         }
 
@@ -321,17 +332,49 @@
                 input.value = currentValue - 1;
                 // Trigger change event to update the experiment
                 input.dispatchEvent(new Event('change'));
+                // Adjust reducer count if it exceeds the new limit
+                adjustReducerLimit();
             }
         }
 
+        // Helper function to adjust reducer count when mapper count changes
+        function adjustReducerLimit() {
+            const mapperInput = document.getElementById('mapperCount');
+            const reducerInput = document.getElementById('reducerCount');
+            const helperText = document.getElementById('reducerHelperText');
+            const mapperCount = parseInt(mapperInput.value);
+            const reducerCount = parseInt(reducerInput.value);
+            const maxReducers = mapperCount + 1;
+            
+            // Update helper text
+            if (helperText) {
+                helperText.textContent = `Maximum: Mappers + 1 (currently ${maxReducers})`;
+            }
+            
+            // If current reducer count exceeds the new limit, reduce it
+            if (reducerCount > maxReducers) {
+                reducerInput.value = maxReducers;
+                reducerInput.dispatchEvent(new Event('change'));
+            }
+        }
+
+        // Initialize helper text on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            adjustReducerLimit();
+        });
+
         function incrementReducer() {
-            const input = document.getElementById('reducerCount');
-            const currentValue = parseInt(input.value);
-            const maxValue = parseInt(input.max);
-            if (currentValue < maxValue) {
-                input.value = currentValue + 1;
+            const reducerInput = document.getElementById('reducerCount');
+            const mapperInput = document.getElementById('mapperCount');
+            const currentValue = parseInt(reducerInput.value);
+            const maxValue = parseInt(reducerInput.max);
+            const mapperCount = parseInt(mapperInput.value);
+            const dynamicMax = mapperCount + 1; // Restrict reducers to mappers + 1
+            
+            if (currentValue < maxValue && currentValue < dynamicMax) {
+                reducerInput.value = currentValue + 1;
                 // Trigger change event to update the experiment
-                input.dispatchEvent(new Event('change'));
+                reducerInput.dispatchEvent(new Event('change'));
             }
         }
 

@@ -134,6 +134,18 @@
             margin: 0;
         }
 
+        /* Helper text styling */
+        .form-text {
+            font-size: 0.75rem;
+            color: #718096;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .text-muted {
+            color: #718096 !important;
+        }
+
         /* Custom number input container */
         .number-input-container {
             display: flex;
@@ -250,6 +262,36 @@
 
         .btn-danger:hover {
             box-shadow: 0 4px 12px rgba(245, 101, 101, 0.3);
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-download:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-download:active {
+            transform: translateY(0);
+        }
+
+        .download-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-download:hover .download-icon {
+            transform: translateY(2px);
         }
 
         .experiment-area {

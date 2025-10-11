@@ -2,6 +2,18 @@
 
 This experiment demonstrates how the Map-Reduce programming framework orchestrates data movement to solve the sorting problem, even when compute volume is relatively low.
 
+## Available Implementations
+
+### 🌐 Web Simulation (`index.html`)
+Interactive browser-based simulation with visual graphics and step-by-step execution.
+
+### 💻 C++ Implementation 
+Standalone C++ programs that implement the same sorting algorithm:
+- `simple_distributed_sort.cpp` - Easy-to-understand version
+- `distributed_sort.cpp` - Full-featured with detailed statistics
+- `compile.bat` / `compile.ps1` - Compilation scripts for Windows
+- See `cpp_implementation_README.md` for detailed instructions
+
 ## Features
 
 - **Interactive Learning**: Step through each phase of Map-Reduce
