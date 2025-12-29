@@ -1,0 +1,175 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "Consider the array [8, 3, 5, 4, 7, 6, 1, 2]. If we use the first element (8) as pivot in QuickSort, how many elements will be in the left partition after the first partitioning step?",
+      "answers": {
+        "a": "3",
+        "b": "6", 
+        "c": "7",
+        "d": "4"
+      },
+      "explanations": {
+        "a": "Count again. Elements less than 8 are: 3, 5, 4, 7, 6, 1, 2.",
+        "b": "Close, but 7 is less than 8, so it should be included.",
+        "c": "Correct! All elements except the pivot (8) are smaller: 3, 5, 4, 7, 6, 1, 2.",
+        "d": "This is incorrect. Count all elements smaller than the pivot 8."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What happens when QuickSort is applied to an already sorted array using the first element as pivot?",
+      "answers": {
+        "a": "It runs in O(n log n) time",
+        "b": "It runs in O(n²) time with maximum recursion depth",
+        "c": "It runs in O(n) time",
+        "d": "It fails to sort the array"
+      },
+      "explanations": {
+        "a": "This would be ideal, but using first element as pivot on sorted array creates worst-case scenario.",
+        "b": "Correct! Each partition creates one empty subarray and one subarray with (n-1) elements, leading to O(n²) time and O(n) recursion depth.",
+        "c": "O(n) time is not possible for a comparison-based sorting algorithm sorting n elements.",
+        "d": "QuickSort will still sort correctly, but inefficiently."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "In the Lomuto partition scheme, if we have array [4, 1, 3, 9, 7] with pivot = 4, what will be the final position of the pivot after partitioning?",
+      "answers": {
+        "a": "Index 0",
+        "b": "Index 1", 
+        "c": "Index 2",
+        "d": "Index 3"
+      },
+      "explanations": {
+        "a": "The pivot needs to move to allow smaller elements to come before it.",
+        "b": "Think about how many elements are smaller than 4 in this array.",
+        "c": "Correct! Elements 1 and 3 are smaller than 4, so pivot 4 will be at index 2 after partitioning: [1, 3, 4, 9, 7].",
+        "d": "This would place too many elements before the pivot."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Which pivot selection strategy provides the best guaranteed performance for QuickSort?",
+      "answers": {
+        "a": "Random pivot",
+        "b": "Median-of-three",
+        "c": "True median (median-of-medians)",
+        "d": "First element"
+      },
+      "explanations": {
+        "a": "Random pivot provides good expected performance but no guarantees.",
+        "b": "Median-of-three improves average case but doesn't guarantee best performance.",
+        "c": "Correct! True median selection guarantees O(n log n) time complexity as it ensures balanced partitions, though it's expensive to compute.",
+        "d": "First element can lead to worst-case O(n²) performance."
+      },
+      "correctAnswer": "c",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "In 3-way QuickSort, how are elements partitioned relative to the pivot?",
+      "answers": {
+        "a": "Less than pivot, greater than pivot",
+        "b": "Less than pivot, equal to pivot, greater than pivot", 
+        "c": "Even numbers, odd numbers",
+        "d": "First half, second half"
+      },
+      "explanations": {
+        "a": "This is regular 2-way partitioning, not 3-way.",
+        "b": "Correct! 3-way partitioning creates three groups: elements less than pivot, equal to pivot, and greater than pivot. This is efficient for arrays with many duplicates.",
+        "c": "3-way QuickSort doesn't partition based on even/odd properties.",
+        "d": "This is not how 3-way partitioning works."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "What is the key advantage of QuickSort over MergeSort?",
+      "answers": {
+        "a": "QuickSort is always faster",
+        "b": "QuickSort is stable",
+        "c": "QuickSort is in-place with O(log n) space complexity",
+        "d": "QuickSort handles duplicates better"
+      },
+      "explanations": {
+        "a": "QuickSort is not always faster; it depends on the input and implementation.",
+        "b": "QuickSort is not stable (doesn't preserve relative order of equal elements).",
+        "c": "Correct! QuickSort's main advantage is that it sorts in-place with only O(log n) additional space for recursion, while MergeSort requires O(n) extra space.",
+        "d": "Standard QuickSort doesn't handle duplicates better than MergeSort (though 3-way QuickSort does)."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "If QuickSort makes 'n' comparisons in the best case for sorting n elements, what is the recurrence relation?",
+      "answers": {
+        "a": "T(n) = 2T(n/2) + O(1)",
+        "b": "T(n) = 2T(n/2) + O(n)",
+        "c": "T(n) = T(n-1) + O(n)", 
+        "d": "T(n) = T(n/2) + O(n)"
+      },
+      "explanations": {
+        "a": "This misses the partitioning cost which is O(n).",
+        "b": "Correct! In the best case, QuickSort divides the problem into two equal subproblems T(n/2) each, plus O(n) work for partitioning.",
+        "c": "This represents the worst-case recurrence, not the best case.",
+        "d": "This would only have one recursive call, which is incorrect for QuickSort."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "In a hybrid QuickSort implementation, why might it switch to Insertion Sort for small subarrays?",
+      "answers": {
+        "a": "Insertion Sort is more accurate",
+        "b": "To reduce the recursion overhead and improve performance on small arrays",
+        "c": "Insertion Sort uses less memory",
+        "d": "To make the algorithm stable"
+      },
+      "explanations": {
+        "a": "Both algorithms are equally accurate for sorting.",
+        "b": "Correct! For small arrays (typically n < 10-20), Insertion Sort's O(n²) time is often faster in practice due to lower overhead, and it reduces recursion depth.",
+        "c": "While Insertion Sort uses O(1) space, the main reason for switching is performance, not memory.",
+        "d": "Switching to Insertion Sort doesn't make the overall algorithm stable."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "Consider an array with all identical elements. What would be the time complexity of standard QuickSort versus 3-way QuickSort?",
+      "answers": {
+        "a": "Both O(n log n)",
+        "b": "Standard: O(n²), 3-way: O(n)",
+        "c": "Standard: O(n), 3-way: O(n log n)",
+        "d": "Standard: O(n log n), 3-way: O(n)"
+      },
+      "explanations": {
+        "a": "This is incorrect; they perform differently on arrays with identical elements.",
+        "b": "Correct! Standard QuickSort with all identical elements performs in O(n²) as partitioning doesn't reduce problem size effectively. 3-way QuickSort recognizes all elements are equal and completes in O(n) time.",
+        "c": "This reverses the actual performance characteristics.",
+        "d": "This incorrectly states standard QuickSort's performance on identical elements."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "What is the expected number of comparisons made by randomized QuickSort to sort n distinct elements?",
+      "answers": {
+        "a": "n log n",
+        "b": "1.39 n log n",
+        "c": "2n log n", 
+        "d": "n²"
+      },
+      "explanations": {
+        "a": "This is too low; the constant factor is missing.",
+        "b": "Correct! The expected number of comparisons for randomized QuickSort is approximately 1.39 n log n, which comes from the mathematical analysis of the algorithm.",
+        "c": "This overestimates the number of comparisons.",
+        "d": "This would be the worst-case, not the expected case."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    }
+  ]
+}

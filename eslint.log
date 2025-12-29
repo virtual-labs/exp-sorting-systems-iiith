@@ -1,0 +1,8 @@
+
+/home/runner/work/exp-sorting-systems-iiith/exp-sorting-systems-iiith/experiment/simulation/js/main.js
+   244:15  warning  'reducerCount' is assigned a value but never used  no-unused-vars
+   866:52  warning  'index' is defined but never used                  no-unused-vars
+  1820:5   warning  'experiment' is assigned a value but never used    no-unused-vars
+
+✖ 3 problems (0 errors, 3 warnings)
+

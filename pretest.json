@@ -1,0 +1,141 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "What is the primary strategy used in QuickSort algorithm?",
+      "answers": {
+        "a": "Divide and Conquer",
+        "b": "Dynamic Programming",
+        "c": "Greedy Approach",
+        "d": "Backtracking"
+      },
+      "explanations": {
+        "a": "Correct! QuickSort uses divide and conquer by partitioning the array around a pivot and recursively sorting the partitions.",
+        "b": "Dynamic Programming is used for optimization problems with overlapping subproblems, not for QuickSort.",
+        "c": "Greedy approach makes local optimal choices, which is not how QuickSort works.",
+        "d": "Backtracking explores all possible solutions by undoing choices, which is not used in QuickSort."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "In QuickSort, what is the purpose of the pivot element?",
+      "answers": {
+        "a": "To find the minimum element",
+        "b": "To divide the array into two partitions",
+        "c": "To count the number of elements",
+        "d": "To find the maximum element"
+      },
+      "explanations": {
+        "a": "The pivot is not used to find the minimum element directly.",
+        "b": "Correct! The pivot divides the array such that elements smaller than pivot go to one side and larger elements go to the other side.",
+        "c": "The pivot is not used for counting elements.",
+        "d": "The pivot is not used to find the maximum element directly."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What is the best-case time complexity of QuickSort?",
+      "answers": {
+        "a": "O(n)",
+        "b": "O(n log n)",
+        "c": "O(n²)",
+        "d": "O(log n)"
+      },
+      "explanations": {
+        "a": "O(n) is too fast for a comparison-based sorting algorithm's best case.",
+        "b": "Correct! When the pivot divides the array into equal halves at each step, we get O(n log n) time complexity.",
+        "c": "O(n²) is the worst-case time complexity, not the best case.",
+        "d": "O(log n) is not achievable for sorting n elements."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Which of the following pivot selection strategies can help avoid worst-case performance?",
+      "answers": {
+        "a": "Always choose the first element",
+        "b": "Always choose the last element",
+        "c": "Random pivot selection",
+        "d": "Always choose the middle element"
+      },
+      "explanations": {
+        "a": "Choosing the first element can lead to worst-case O(n²) performance on sorted arrays.",
+        "b": "Choosing the last element can also lead to worst-case performance on certain inputs.",
+        "c": "Correct! Random pivot selection helps achieve expected O(n log n) performance by avoiding consistently bad pivot choices.",
+        "d": "Always choosing the middle element by position (not value) doesn't guarantee good performance."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "After one complete partitioning step in QuickSort, which statement is true about the pivot element?",
+      "answers": {
+        "a": "It might need to be moved again",
+        "b": "It is in its final sorted position",
+        "c": "It is the smallest element in the array",
+        "d": "It is the largest element in the array"
+      },
+      "explanations": {
+        "a": "Once partitioned correctly, the pivot doesn't need to be moved again.",
+        "b": "Correct! After partitioning, the pivot is in its final sorted position with smaller elements to its left and larger elements to its right.",
+        "c": "The pivot is not necessarily the smallest element, just in its correct sorted position.",
+        "d": "The pivot is not necessarily the largest element, just in its correct sorted position."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "What is the worst-case time complexity of QuickSort and when does it occur?",
+      "answers": {
+        "a": "O(n log n) when array is randomly ordered",
+        "b": "O(n²) when pivot is always the median",
+        "c": "O(n²) when pivot is always the smallest or largest element",
+        "d": "O(n) when array is already sorted"
+      },
+      "explanations": {
+        "a": "O(n log n) is actually the average case for randomly ordered arrays.",
+        "b": "When pivot is the median, we get the best case O(n log n), not worst case.",
+        "c": "Correct! Worst case O(n²) occurs when the pivot is always the smallest or largest element, creating highly unbalanced partitions.",
+        "d": "O(n) is not achievable for comparison-based sorting of n elements."
+      },
+      "correctAnswer": "c",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "In the context of QuickSort, what does 'reducing the problem' mean?",
+      "answers": {
+        "a": "Decreasing the number of comparisons",
+        "b": "Dividing the array into smaller subarrays to sort independently",
+        "c": "Removing duplicate elements",
+        "d": "Converting to a simpler sorting algorithm"
+      },
+      "explanations": {
+        "a": "While comparisons may be optimized, 'reducing' specifically refers to problem size reduction.",
+        "b": "Correct! Reducing means breaking the original sorting problem into smaller independent sorting problems (partitions).",
+        "c": "QuickSort doesn't specifically remove duplicates, though it handles them.",
+        "d": "QuickSort doesn't convert to another algorithm; it reduces the problem size through partitioning."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "What is the space complexity of QuickSort in the average case?",
+      "answers": {
+        "a": "O(1)",
+        "b": "O(log n)",
+        "c": "O(n)",
+        "d": "O(n log n)"
+      },
+      "explanations": {
+        "a": "O(1) would mean constant space, but QuickSort needs space for recursion stack.",
+        "b": "Correct! The average case space complexity is O(log n) due to the recursion stack depth.",
+        "c": "O(n) space would be needed in the worst case when recursion depth is maximum.",
+        "d": "O(n log n) space is not required by QuickSort."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    }
+  ]
+}
